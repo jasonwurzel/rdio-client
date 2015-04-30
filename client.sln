@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RdioApiClient", "RdioApiClient\RdioApiClient.csproj", "{6BD45FBC-20C3-4525-8E68-063D505BCD12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RdioConsoleSimpleExample", "RdioConsoleSimpleExample\RdioConsoleSimpleExample.csproj", "{312271D2-4149-4D32-BBCB-54E27EB1CD75}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6BD45FBC-20C3-4525-8E68-063D505BCD12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BD45FBC-20C3-4525-8E68-063D505BCD12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BD45FBC-20C3-4525-8E68-063D505BCD12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BD45FBC-20C3-4525-8E68-063D505BCD12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{312271D2-4149-4D32-BBCB-54E27EB1CD75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{312271D2-4149-4D32-BBCB-54E27EB1CD75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{312271D2-4149-4D32-BBCB-54E27EB1CD75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{312271D2-4149-4D32-BBCB-54E27EB1CD75}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
