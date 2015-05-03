@@ -21,7 +21,8 @@ namespace RdioConsoleSimpleExample
 			//string verifier = "";
 			//var res2 = client.CompleteUserAuthorizationAsync(verifier).Result;
 			var response = client.Playback.GetPlaybackTokenAsync("asdlkj").Result;
-			
+			var playlists = client.Playlists.GetPlaylistsAsync().Result;
+			var myplaylist = playlists.Owned.First();
 		}
 	}
 }

@@ -1,0 +1,2169 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RdioNet</name>
+    </assembly>
+    <members>
+        <member name="T:RdioNet.Methods.CatalogMethods">
+            <summary>
+            Catalog methods of the Rdio API.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Methods.MethodsBase">
+            <summary>
+            Class that implements the basic functionality required to call Rdio API's methods.
+            </summary>
+        </member>
+        <member name="M:RdioNet.Methods.MethodsBase.PostAsync``1(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Asynchronously calls a method with the POST verb.
+            </summary>
+            <typeparam name="TResult">The type of the deserialized result.</typeparam>
+            <param name="method">The name of the method being called.</param>
+            <param name="parameters">Any required and optional parameters used by the method.</param>
+            <returns>The deserialized result of the call.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CatalogMethods.GetAlbumsByUpcAsync(System.String,System.String[])">
+            <summary>
+            Finds and returns albums based on their Universal Product Code (UPC).
+            </summary>
+            <param name="upc">The UPC code to search for.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>A list of Album objects that have the supplied UPC.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CatalogMethods.GetAlbumsForArtistAsync(System.String,System.Boolean,System.Int32,System.Int32,System.String[])">
+            <summary>
+            Gets the albums by (or featuring) an artist.
+            </summary>
+            <param name="artist">The artist's key</param>
+            <param name="start">The offset of the first result to return.</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="featuring">Return only albums featuring the artist rather than albums credited to the artist.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns a list of albums.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CatalogMethods.GetAlbumsForLabelAsync(System.String,RdioNet.Models.RdioSortingFields,System.Int32,System.Int32,System.String[])">
+            <summary>
+            	Gets the albums for a label.
+            </summary>
+            <param name="label">The label's key.</param>   
+            <param name="sort">The sorting direction of the results. Only PlayCount and ReleaseDate are known to be supported.</param>
+            <param name="start">The offset of the first result to return.</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns a list of albums.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CatalogMethods.GetArtistsForLabelAsync(System.String,System.Int32,System.Int32,System.String[])">
+            <summary>
+            	Gets the artists for a label.
+            </summary>
+            <param name="label">The label's key.</param>
+            <param name="start">The offset of the first result to return.</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns a list of artists.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CatalogMethods.GetTracksByIsrcAsync(System.String,System.String[])">
+            <summary>
+            Finds and returns tracks based on their International Standard Recording Code (ISRC).
+            </summary>
+            <param name="isrc">The ISRC code to search for.</param>
+            <returns>Returns a list of tracks that have the supplied ISRC.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CatalogMethods.GetTracksForArtistAsync(System.String,System.Boolean,System.Int32,System.Int32,System.String[])">
+            <summary>
+            Gets all the tracks by a given artist.
+            </summary>
+            <param name="artist">The artist's key.</param>
+            <param name="appearsOn">Returns tracks that the artist appears on rather than tracks credited to the artist.</param>
+            <param name="start">The offset of the first result to return.</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns a list of tracks.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CatalogMethods.SearchAsync``1(System.String,RdioNet.Models.RdioObjectType,System.Boolean,System.Int32,System.Int32,System.String[])">
+            <summary>
+            Search for artists, albums, tracks, users or all kinds of objects
+            </summary>
+            <typeparam name="T">The type of the object expected to return or <seealso cref="T:RdioNet.Models.RdioObject"/> if multiple types are expected.</typeparam>
+            <param name="query">The search query.</param>
+            <param name="types">The types to include in results.</param>
+            <param name="neverOr">Search uses an AND query that falls back to an OR query if there are no results, passing true here will disable that fallback.</param>
+            <param name="start">The offset of the first result to return.</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns a list of objects.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CatalogMethods.SearchSuggestionsAsync``1(System.String,RdioNet.Models.RdioObjectType,System.String[])">
+            <summary>
+            Match the supplied prefix against artists, albums, tracks, playlists and people in the Rdio system. Return the first ten matches.
+            </summary>
+            <typeparam name="T">The type of the object expected to return or <seealso cref="T:RdioNet.Models.RdioObject"/> if multiple types are expected.</typeparam>
+            <param name="query">The search query.</param>
+            <param name="types">The types to include in results.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns an list of objects matching the search prefix.</returns>
+        </member>
+        <member name="T:RdioNet.Methods.CollectionMethods">
+            <summary>
+            Collection methods of the Rdio API.
+            </summary>
+        </member>
+        <member name="M:RdioNet.Methods.CollectionMethods.AddToCollectionAsync(System.String[])">
+            <summary>
+            Add tracks or playlists to the current user's collection. Authentication is required.
+            </summary>
+            <param name="keys">The tracks and playlists to add to the collection.</param>
+            <returns>Always returns <value>true</value>.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CollectionMethods.AddToCollectionAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Add tracks or playlists to the current user's collection. Authentication is required.
+            </summary>
+            <param name="keys">The tracks and playlists to add to the collection.</param>
+            <returns>Always returns <value>true</value>.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CollectionMethods.GetAlbumsForArtistInCollectionAsync(System.String,System.String,RdioNet.Models.RdioSortingFields,System.String[])">
+            <summary>
+            Get the albums in the user's collection by a particular artist.
+            </summary>
+            <param name="artist">The artist's key.</param>
+            <param name="user">The user's key or null to use the current authenticated user.</param>
+            <param name="sort">The sorting direction of the results. Only Name and ReleaseDate are supported.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns a list of <seealso cref="T:RdioNet.Models.RdioCollectionAlbum"/> objects.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CollectionMethods.GetAlbumsInCollectionAsync(System.String,System.String,System.Int32,System.Int32,RdioNet.Models.RdioSortingFields,System.String[])">
+            <summary>
+            Get all of the albums in the user's collection.
+            </summary>
+            <param name="user">The user's key or null to use the current authenticated user.</param>
+            <param name="query">Filter collection's albums by the query.</param>
+            <param name="start">The offset of the first result to return.</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="sort">The sorting direction of the results. Only DateAdded, PlayCount, Artist and Name supported.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns a list of <seealso cref="T:RdioNet.Models.RdioCollectionAlbum"/> objects.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CollectionMethods.GetArtistsInCollectionAsync(System.String,System.String,System.Int32,System.Int32,RdioNet.Models.RdioSortingFields,System.String[])">
+            <summary>
+            Gets all the artists in a user's collection.
+            </summary>
+            <param name="user">The user's key or null to use the current authenticated user.</param>
+            <param name="query">Filter collection's artists by the query.</param>
+            <param name="start">The offset of the first result to return.</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="sort">The sorting direction of the results. Only Name and PlayCount are supported.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns a list of <seealso cref="T:RdioNet.Models.RdioCollectionArtist"/> objects.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CollectionMethods.GetTracksForAlbumInCollectionAsync(System.String,System.String,System.String[])">
+            <summary>
+            Gets which tracks on the given album are in the user's collection.
+            </summary>
+            <param name="album">The album's key.</param>
+            <param name="user">The user's key or null to use the current authenticated user.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>A list of tracks on the given album.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CollectionMethods.GetTracksForArtistInCollectionAsync(System.String,System.String,System.String[])">
+            <summary>
+            Gets which tracks from the given artist are in the user's collection.
+            </summary>
+            <param name="artist">The artist's key.</param>
+            <param name="user">The user's key or null to use the current authenticated user.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>A list of tracks on the given album.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CollectionMethods.GetTracksInCollectionAsync(System.String,System.String,System.Int32,System.Int32,RdioNet.Models.RdioSortingFields,System.String[])">
+            <summary>
+            Gets all the tracks in the user's collection..
+            </summary>
+            <param name="user">The user's key or null to use the current authenticated user.</param>
+            <param name="query">Filter collection's albums by the query.</param>
+            <param name="start">The offset of the first result to return.</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="sort">The sorting direction of the results. Only DateAdded, PlayCount, Artist, Album and Name supported.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns a list of <seealso cref="T:RdioNet.Models.RdioCollectionAlbum"/> objects.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CollectionMethods.RemoveFromCollectionAsync(System.String[])">
+            <summary>
+            Removes tracks or playlists to the current user's collection. Authentication is required.
+            </summary>
+            <param name="keys">The tracks and playlists to remove from the collection.</param>
+            <returns>Returns <value>true</value> if the remove succeeds or <value>false</value> if the remove fails.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CollectionMethods.RemoveFromCollectionAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Removes tracks or playlists to the current user's collection. Authentication is required.
+            </summary>
+            <param name="keys">The tracks and playlists to remove from the collection.</param>
+            <returns>Returns <value>true</value> if the remove succeeds or <value>false</value> if the remove fails.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CollectionMethods.SetAvailableOfflineAsync(System.Boolean,System.String[])">
+            <summary>
+            Mark tracks or playlists for offline syncing. Authentication is required.
+            </summary>
+            <param name="keys">The tracks and playlists to be marked.</param>
+            <returns>Returns <value>true</value> if the remove succeeds or <value>false</value> if the remove fails.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CollectionMethods.SetAvailableOfflineAsync(System.Boolean,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Mark tracks or playlists for offline syncing. Authentication is required.
+            </summary>
+            <param name="keys">The tracks and playlists to be marked.</param>
+            <returns>Returns <value>true</value> if the remove succeeds or <value>false</value> if the remove fails.</returns>
+        </member>
+        <member name="T:RdioNet.Methods.ActivityMethods">
+            <summary>
+            Activity and Statistics methods of the Rdio API.
+            </summary>
+        </member>
+        <member name="M:RdioNet.Methods.ActivityMethods.GetActivityStreamAsync(System.String,RdioNet.Models.RdioActivityScope,System.Int32,System.Int32,System.String[])">
+            <summary>
+            Get the activity events for a user, a user's friends, or everyone on Rdio.
+            </summary>
+            <param name="user">The user to retrieve an activity stream for.</param>
+            <param name="scope">The scope of the activity stream.</param>
+            <param name="lastId">he last id returned by the last call to this method.</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns an <seealso cref="T:RdioNet.Models.RdioActivity"/> object with a collection of updates.
+            Each update is an object whose class is derivated from <seealso cref="T:RdioNet.Models.RdioActivityUpdate"/>.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.ActivityMethods.GetHeavyRotationByArtistsAsync(System.String,System.Boolean,System.Int32,System.Int32,System.Int32,System.String[])">
+            <summary>
+            Finds the most popular artists for a user, their friends or the whole site.
+            </summary>
+            <param name="user">The user, or everyone if this is missing.</param>
+            <param name="friends">The user's friends's heavy rotation instead of the user's.</param>
+            <param name="limit">The maximum number of results to return.</param>
+            <param name="start">The offset of the first result to return</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns a list of <seealso cref="T:RdioNet.Models.RdioArtist"/> objects, ordered by descending popularity.
+            Additionally those objects have a Hits integer property indicating a relative popularity weight.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.ActivityMethods.GetHeavyRotationByAlbumsAsync(System.String,System.Boolean,System.Int32,System.Int32,System.Int32,System.String[])">
+            <summary>
+            Finds the most popular albums for a user, their friends or the whole site.
+            </summary>
+            <param name="user">The user, or everyone if this is missing.</param>
+            <param name="friends">The user's friends's heavy rotation instead of the user's.</param>
+            <param name="limit">The maximum number of results to return.</param>
+            <param name="start">The offset of the first result to return</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns a list of <seealso cref="T:RdioNet.Models.RdioAlbum"/> objects, ordered by descending popularity.
+            Additionally those objects have a Hits integer property indicating a relative popularity weight.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.ActivityMethods.GetNewReleasesAsync(RdioNet.Models.RdioTimeframe,System.Int32,System.Int32,System.String[])">
+            <summary>
+            Return new albums released across a timeframe.
+            </summary>
+            <param name="time">The timeframe</param>
+            <param name="start">The offset of the first result to return</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns a list of <seealso cref="T:RdioNet.Models.RdioAlbum"/> objects.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.ActivityMethods.GetTopChartsByArtistAsync(System.Int32,System.Int32,System.String[])">
+            <summary>
+            Return the site-wide most popular artists.
+            </summary>
+            <param name="start">The offset of the first result to return</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns a list of <seealso cref="T:RdioNet.Models.RdioArtist"/> objects.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.ActivityMethods.GetTopChartsByAlbumAsync(System.Int32,System.Int32,System.String[])">
+            <summary>
+            Return the site-wide most popular albums.
+            </summary>
+            <param name="start">The offset of the first result to return</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns a list of <seealso cref="T:RdioNet.Models.RdioAlbum"/> objects.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.ActivityMethods.GetTopChartsByTrackAsync(System.Int32,System.Int32,System.String[])">
+            <summary>
+            Return the site-wide most popular tracks.
+            </summary>
+            <param name="start">The offset of the first result to return</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns a list of <seealso cref="T:RdioNet.Models.RdioTrack"/> objects.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.ActivityMethods.GetTopChartsByPlaylistAsync(System.Int32,System.Int32,System.String[])">
+            <summary>
+            Return the site-wide most popular playlists.
+            </summary>
+            <param name="start">The offset of the first result to return</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns a list of <seealso cref="T:RdioNet.Models.RdioPlaylist"/> objects.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.ActivityMethods.GetTopChartsAsync``1(RdioNet.Models.RdioObjectType,System.Int32,System.Int32,System.String[])">
+            <summary>
+            Return the site-wide most popular items for a given type.
+            </summary>
+            <param name="type">The types to include in results. Valid values are Artist, Album, Track and Playlist.</param>
+            <param name="start">The offset of the first result to return</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns a list of <seealso cref="T:RdioNet.Models.RdioArtist"/>, <seealso cref="T:RdioNet.Models.RdioAlbum"/>, <seealso cref="T:RdioNet.Models.RdioTrack"/> or 
+            <seealso cref="T:RdioNet.Models.RdioPlaylist"/> objects, depending on the <see cref="!:type"/> argument.</returns>
+        </member>
+        <member name="T:RdioNet.Methods.PlaybackMethods">
+            <summary>
+            Playback methods of the Rdio API.
+            </summary>
+        </member>
+        <member name="M:RdioNet.Methods.PlaybackMethods.GetPlaybackTokenAsync(System.String)">
+            <summary>
+            Get an playback token. If you are using this for web playback you must supply a domain.
+            </summary>
+            <param name="domain">The domain that the playback SWF will be embedded in.</param>
+            <returns>Returns a playback token string.</returns>
+        </member>
+        <member name="T:RdioNet.Methods.SocialNetworkMethods">
+            <summary>
+            Social Network methods of the Rdio API.
+            </summary>
+        </member>
+        <member name="M:RdioNet.Methods.SocialNetworkMethods.AddFriendAsync(System.String)">
+            <summary>
+            Adds a friend to the current user. Authentication is required.
+            </summary>
+            <param name="user">The user's key to add.</param>
+            <returns>Returns <value>true</value> on success or <value>false</value> on failure.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.SocialNetworkMethods.GetCurrentUserAsync(System.String[])">
+            <summary>
+            Gets information about the currently logged in user. Authentication is required.
+            </summary>
+            <param name="extras">The extra fields to be included in the returned <seealso cref="T:RdioNet.Models.RdioUser"/>.</param>
+            <returns>Returns an <seealso cref="T:RdioNet.Models.RdioUser"/> object of the current user.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.SocialNetworkMethods.FindUserByEmailAsync(System.String,System.String[])">
+            <summary>
+             Finds a user by email address.
+            </summary>
+            <param name="email">The email address of the user.</param>
+            <param name="extras">The extra fields to be included in the returned <seealso cref="T:RdioNet.Models.RdioUser"/>.</param>
+            <returns>Returns an <seealso cref="T:RdioNet.Models.RdioUser"/> object of the user or <value>null</value>
+            if no user is found.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.SocialNetworkMethods.FindUserByVanityNameAsync(System.String,System.String[])">
+            <summary>
+             Finds a user by username.
+            </summary>
+            <param name="vanityName">The username of the user.</param>
+            <param name="extras">The extra fields to be included in the returned <seealso cref="T:RdioNet.Models.RdioUser"/>.</param>
+            <returns>Returns an <seealso cref="T:RdioNet.Models.RdioUser"/> object of the user or <value>null</value>
+            if no user is found.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.SocialNetworkMethods.RemoveFriendAsync(System.String)">
+            <summary>
+            Removes a friend from the current user. Authentication is required.
+            </summary>
+            <param name="user">The user's key to remove.</param>
+            <returns>Returns <value>true</value> on success or <value>false</value> on failure.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.SocialNetworkMethods.GetUserFollowers(System.String,System.Int32,System.Int32,System.Boolean,System.String[])">
+            <summary>
+            Get a list of users following a user.
+            </summary>
+            <param name="user">The user's key.</param>
+            <param name="start">The offset of the first result to return.</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="inCommon">If present, return followers of both the user argument and this user.</param>
+            <param name="extras">The extra fields to be included in the returned <seealso cref="T:RdioNet.Models.RdioUser"/>.</param>
+            <returns>A list of <seealso cref="T:RdioNet.Models.RdioUser"/> objects, sorted by descending add time.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.SocialNetworkMethods.GetUserFollowing(System.String,System.Int32,System.Int32,System.Boolean,System.String[])">
+            <summary>
+            Get a list of users that a user follows.
+            </summary>
+            <param name="user">The user's key.</param>
+            <param name="start">The offset of the first result to return.</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="inCommon">If present, return friends being followed by both the user argument and this user.</param>
+            <param name="extras">The extra fields to be included in the returned <seealso cref="T:RdioNet.Models.RdioUser"/>.</param>
+            <returns>A list of <seealso cref="T:RdioNet.Models.RdioUser"/> objects, sorted by descending add time.</returns>
+        </member>
+        <member name="T:RdioNet.Methods.PlaylistsMethods">
+            <summary>
+            Playlists methods of the Rdio API.
+            </summary>
+        </member>
+        <member name="M:RdioNet.Methods.PlaylistsMethods.AddToPlaylistAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.String[])">
+            <summary>
+            Adds tracks to a playlist. Authentication is required.
+            </summary>
+            <param name="playlist">The playlist's key.</param>
+            <param name="keys">A collection of tracks to add to the playlist.</param>
+            <param name="extras">The extra fields to be included in the returned <seealso cref="T:RdioNet.Models.RdioPlaylist"/>.</param>
+            <returns>A <seealso cref="T:RdioNet.Models.RdioPlaylist"/> object with the added tracks.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.PlaylistsMethods.CreatePlaylistAsync(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.String[])">
+            <summary>
+            Creates a new playlist in the current user's collection. The new playlist will be returned
+            if the creation is successful, otherwise null will be returned. Authentication is required.
+            </summary>
+            <param name="name">The playlist's name.</param>
+            <param name="description">The playlist's description.</param>
+            <param name="keys">The initial tracks of the playlist.</param>
+            <param name="extras">The extra fields to be included in the returned <seealso cref="T:RdioNet.Models.RdioPlaylist"/>.</param>
+            <returns>Returns the new <seealso cref="T:RdioNet.Models.RdioPlaylist"/>.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.PlaylistsMethods.DeletePlaylistAsync(System.String)">
+            <summary>
+            Deletes a playlist. Authentication is required.
+            </summary>
+            <param name="playlist">The playlist's key.</param>
+            <returns>Returns <value>true</value> on success but <value>false</value> on failure.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.PlaylistsMethods.GetPlaylistsAsync(System.String,System.Boolean,System.String[])">
+            <summary>
+            Gets a user's playlists. If no user is specified then the current user will be used.
+            </summary>
+            <param name="user">The user's key or null to use the current authenticated user.</param>
+            <param name="orderedList">True if the playlists should be returned as an ordered list.</param>	 
+            <param name="extras">The extra fields to be included in the returned <seealso cref="T:RdioNet.Models.RdioPlaylist"/>.</param>
+            <returns>Returns an object containing three arrays of Playlist objects, owned (playlists created by the user), 
+            collab (playlists that the user is a collaborator on), and subscribed (playlists that the user has subscribed to)</returns>
+        </member>
+        <member name="M:RdioNet.Methods.PlaylistsMethods.GetUserPlaylistsAsync(System.String,RdioNet.Models.RdioPlaylistKind,RdioNet.Models.RdioSortingFields,System.Int32,System.Int32,System.String[])">
+            <summary>
+            Gets a user's playlist.
+            </summary>
+            <param name="user">The user's key.</param>
+            <param name="kind">The kind of playlists to be returned.</param>
+            <param name="sort">The sorting direction of the results. Only Name and LastUpdated are supported.</param>
+            <param name="start">The offset of the first result to return.</param>
+            <param name="count">The maximum number of results to return.</param>
+            <param name="extras">The extra fields to be included in the returned <seealso cref="T:RdioNet.Models.RdioPlaylist"/>.</param>
+            <returns>A list of <seealso cref="T:RdioNet.Models.RdioPlaylist"/> objects matching the filter.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.PlaylistsMethods.RemoveFromPlaylistAsync(System.String,System.Int32,System.Int32,System.Collections.Generic.IEnumerable{System.String},System.String[])">
+            <summary>
+            Removes items from a playlist by range (index and count). All track keys to remove must 
+            be in the tracks list too. This is to prevent accidental overwriting of playlist changes.
+            Authentication is required.
+            </summary>
+            <param name="playlist">The playlist's key.</param>
+            <param name="index">The index of the first item to remove.</param>
+            <param name="count">The number of tracks to remove from the playlist.</param>
+            <param name="tracks">The keys of tracks to remove.</param>
+            <param name="extras">The extra fields to be included in the returned <seealso cref="T:RdioNet.Models.RdioPlaylist"/>.</param>
+            <returns>Returns the <seealso cref="T:RdioNet.Models.RdioPlaylist"/> object on success or null on failure.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.PlaylistsMethods.SetPlaylistCollaboratingAsync(System.String,System.Boolean)">
+            <summary>
+            Start or stop collaborating on this playlist. Authentication is required.
+            </summary>
+            <param name="playlist">The playlist's key.</param>
+            <param name="collaborating">Set the user collaboration status for this playlist.</param>
+            <returns>Returns <value>true</value> on success or <value>false</value> on failure.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.PlaylistsMethods.SetPlaylistCollaborationModeAsync(System.String,RdioNet.Models.RdioPlaylistCollaborationMode)">
+            <summary>
+            Set the playlist collaboration mode. Authentication is required.
+            </summary>
+            <param name="playlist">The playlist's key.</param>
+            <param name="mode">The new collaboration mode for the playlist.</param>
+            <returns>Returns <value>true</value> on success or <value>false</value> on failure.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.PlaylistsMethods.SetPlaylistFieldsAsync(System.String,System.String,System.String)">
+            <summary>
+            Sets the name and description for a playlist. Authentication is required.
+            </summary>
+            <param name="playlist">The playlist's key.</param>
+            <param name="name">The new name for the playlist.</param>
+            <param name="description">The new description for the playlist.</param>
+            <returns>Returns <value>true</value> on success or <value>false</value> on failure.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.PlaylistsMethods.SetPlaylistOrderAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.String[])">
+            <summary>
+            Saves the given order of tracks in a given playlist. The new order must have the same tracks 
+            as the previous order (this method may not be used to add/remove tracks). Authentication is required.
+            </summary>
+            <param name="playlist">The playlist's key.</param>
+            <param name="tracks">The list of the reordered tracks' keys.</param>
+            <param name="extras">The extra fields to be included in the returned <seealso cref="T:RdioNet.Models.RdioPlaylist"/>.</param>
+            <returns>Returns the <seealso cref="T:RdioNet.Models.RdioPlaylist"/> object on success or null on failure.</returns>
+        </member>
+        <member name="T:RdioNet.Models.Activities.RdioCommentActivityUpdate">
+            <summary>
+            Represents an comment update activity involving one <seealso cref="T:RdioNet.Models.RdioObject"/> objects.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioActivityUpdate">
+            <summary>
+            Represents an entry in the user's activity stream.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioActivityUpdate.Owner">
+            <summary>
+            The owner of the update.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioActivityUpdate.Date">
+            <summary>
+            The date and time when the update occurred..
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioActivityUpdate.UpdateType">
+            <summary>
+            The type of the update.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Activities.RdioCommentActivityUpdate.Key">
+            <summary>
+            The comment's key.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Activities.RdioCommentActivityUpdate.Comment">
+            <summary>
+            The comment text.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Activities.RdioCommentActivityUpdate.ReviewedItem">
+            <summary>
+            The reviewed item.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.Activities.RdioPeopleActivityUpdate">
+            <summary>
+            Represents an update activity involving one or more <seealso cref="T:RdioNet.Models.RdioUser"/> objects.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Activities.RdioPeopleActivityUpdate.People">
+            <summary>
+            A list of persons affected by this update.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.Activities.RdioPlaylistActivityUpdate">
+            <summary>
+            Represents an update activity involving a <seealso cref="T:RdioNet.Models.RdioPlaylist"/>.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Activities.RdioPlaylistActivityUpdate.Playlist">
+            <summary>
+            The playlist affected by the update.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.Activities.RdioCollectionActivityUpdate">
+            <summary>
+            Represents an update activity involving one or more <seealso cref="T:RdioNet.Models.RdioCollectionAlbum"/> objects.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Activities.RdioCollectionActivityUpdate.Albums">
+            <summary>
+            A list of albums affected by the update.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioActivity">
+            <summary>
+            Represents an collection of recent activity	of an user.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioActivity.LastId">
+            <summary>
+            The last update id for the user's activity stream.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioActivity.User">
+            <summary>
+            The user to which all activity is related.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioActivity.Updates">
+            <summary>
+            A list of recent activity updates. Check the <seealso cref="!:NS:RdioNet.Models.Activities"/> namespace
+            for a list of possible object types.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioActivityScope">
+            <summary>
+            Defines a list of possible scopes for activities.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioActivityScope.User">
+            <summary>
+            Only user activities.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioActivityScope.Friends">
+            <summary>
+            Friends activities are included.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioActivityScope.Everyone">
+            <summary>
+            Everyones activities are included.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioActivityUpdateType">
+            <summary>
+            Defines a list of possible kinds of activity updates.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioPlaylistCollaborationMode">
+            <summary>
+            Defines the possible collaboration modes for playlists.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioPlaylistCollaborationMode.None">
+            <summary>
+            The playlist isn't collaborative.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioPlaylistCollaborationMode.Everyone">
+            <summary>
+            Collaboration with all Rdio users.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioPlaylistCollaborationMode.Following">
+            <summary>
+            Collaboration with Rdio users followed by the playlist owner.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioTimeframe">
+            <summary>
+            Defines a list of timeframe options.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioTimeframe.ThisWeek">
+            <summary>
+            This week's events.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioTimeframe.LastWeek">
+            <summary>
+            Last week's events.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioTimeframe.TwoWeeks">
+            <summary>
+            Last two weeks' events.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.Results.RdioPlaylistsResult">
+            <summary>
+            Defines a result for GetPlaylists method.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Results.RdioPlaylistsResult.Owned">
+            <summary>
+            The playlists owned by the user.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Results.RdioPlaylistsResult.Collab">
+            <summary>
+            The playlists that the user is a collaborator on.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Results.RdioPlaylistsResult.Subscribed">
+            <summary>
+            The playlists that the user subscribed to.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.Results.RdioSearchResult`1">
+            <summary>
+            Defines a result for Search method.
+            </summary>
+            <typeparam name="T">The type of the expected object or <seealso cref="T:RdioNet.Models.RdioObject"/> if the type is not known.</typeparam>
+        </member>
+        <member name="P:RdioNet.Models.Results.RdioSearchResult`1.NumberOfResults">
+            <summary>
+            The total number of objects found by the query (it is not the number of objects returned).
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Results.RdioSearchResult`1.Results">
+            <summary>
+            The resulting objects of the search.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Results.RdioSearchResult`1.PersonCount">
+            <summary>
+            The count of objects of type <seealso cref="T:RdioNet.Models.RdioUser"/>.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Results.RdioSearchResult`1.TrackCount">
+            <summary>
+            The count of objects of type <seealso cref="T:RdioNet.Models.RdioTrack"/>.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Results.RdioSearchResult`1.AlbumCount">
+            <summary>
+            The count of objects of type <seealso cref="T:RdioNet.Models.RdioAlbum"/>.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Results.RdioSearchResult`1.PlaylistCount">
+            <summary>
+            The count of objects of type <seealso cref="T:RdioNet.Models.RdioPlaylist"/>.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Results.RdioSearchResult`1.ArtistCount">
+            <summary>
+            The count of objects of type <seealso cref="T:RdioNet.Models.RdioArtist"/>.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioSortingFields">
+            <summary>
+            Defines a possible sorting mechanisms for Rdio items.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioSortingFields.Name">
+            <summary>
+            Items are sorted by the name.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioSortingFields.ReleaseDate">
+            <summary>
+            Items are sorted by the release date.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioSortingFields.DateAdded">
+            <summary>
+            Items are sorted by the date they were added to the collection.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioSortingFields.PlayCount">
+            <summary>
+            Items are sorted by the number of times it has been played.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioSortingFields.Artist">
+            <summary>
+            Items are sorted by artist.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioSortingFields.Album">
+            <summary>
+            Items are sorted by album.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioSortingFields.LastUpdated">
+            <summary>
+            Items are sorted by the time they were last updated.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioUserCollectionStation">
+            <summary>
+            Represents a User Collection Station.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioUserStation">
+            <summary>
+            Represents an user's station.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioStation">
+            <summary>
+            The base class for all stations.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioObject">
+            <summary>
+            The base class of every Rdio object.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioObject.Key">
+            <summary>
+            Uniquely identifies a Rdio object.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioObject.Type">
+            <summary>
+            Identifies the type of the object.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioStation.Count">
+            <summary>
+            The number of tracks in the station.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioStation.Name">
+            <summary>
+            The name of the station.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioStation.Tracks">
+            <summary>
+            The tracks for the station.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioStation.ReloadOnRepeat">
+            <summary>
+            The station should be reloaded when it completes playing and repeat is enabled.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioStation.TrackKeys">
+            <summary>
+            Extra. The keys of the tracks for the station.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioStation.Extras">
+            <summary>
+            List of extra properties.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUserStation.User">
+            <summary>
+            The user.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUserStation.BaseIcon">
+            <summary>
+            The relative URL of an image of the user.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUserStation.Icon">
+            <summary>
+            The URL of an image of the user.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioArtistTopSongsStation">
+            <summary>
+            Represents a artist's top songs station.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioArtistStation">
+            <summary>
+            Represents a artist's station.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtistStation.RadioKey">
+            <summary>
+            The key of the station for artist recommendations.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtistStation.TopSongsKey">
+            <summary>
+            The key of the station for the artist's top songs.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtistStation.BaseIcon">
+            <summary>
+            The partial URL of an image for the station.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtistStation.ArtistUrl">
+            <summary>
+            The relative URL of the artist on Rdio web site.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtistStation.Icon">
+            <summary>
+            An image for the artist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtistStation.HasRadio">
+            <summary>
+            Identifies if a station is available for the artist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtistStation.Url">
+            <summary>
+            The relative URL of the artist on Rdio web site.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtistStation.ArtistName">
+            <summary>
+            The name of the artist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtistStation.ShortUrl">
+            <summary>
+            The URL of the artist on Rdio web site.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtistStation.AlbumCount">
+            <summary>
+            Extra. The number of albums that the artist has on Rdio.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtistStation.Extras">
+            <summary>
+            List of extra properties.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioHeavyRotationUserStation">
+            <summary>
+            Represents a User Heavy Rotation Station
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioHeavyRotationStation">
+            <summary>
+            Represents a User Network Heavy Rotation Station or Global Heavy Rotation.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.Extras.RdioArtistStationExtras">
+            <summary>
+            Defines the constants for all the extra fields in <seealso cref="T:RdioNet.Models.RdioArtistStation"/>.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.Extras.RdioStationExtras">
+            <summary>
+            Defines the constants for all the extra fields in <seealso cref="T:RdioNet.Models.RdioStation"/>.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.Extras.RdioExtras">
+            <summary>
+            Defines the constants for all the extra fields in an object.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Extras.RdioExtras.All">
+            <summary>
+            A collection of all extra fields.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Extras.RdioStationExtras.All">
+            <summary>
+            A collection of all extra fields.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Extras.RdioArtistStationExtras.All">
+            <summary>
+            A collection of all extra fields.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.Extras.RdioAlbumExtras">
+            <summary>
+            Defines the constants for all the extra fields in <seealso cref="T:RdioNet.Models.RdioAlbum"/>.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Extras.RdioAlbumExtras.All">
+            <summary>
+            A collection of all extra fields.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.Extras.RdioArtistExtras">
+            <summary>
+            Defines the constants for all the extra fields in <seealso cref="T:RdioNet.Models.RdioArtist"/>.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Extras.RdioArtistExtras.All">
+            <summary>
+            A collection of all extra fields.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.Extras.RdioCollectionAlbumExtras">
+            <summary>
+            Defines the constants for all the extra fields in <seealso cref="T:RdioNet.Models.RdioCollectionAlbum"/>.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Extras.RdioCollectionAlbumExtras.All">
+            <summary>
+            A collection of all extra fields.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.Extras.RdioCollectionArtistExtras">
+            <summary>
+            Defines the constants for all the extra fields in <seealso cref="T:RdioNet.Models.RdioCollectionArtist"/>.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Extras.RdioCollectionArtistExtras.All">
+            <summary>
+            A collection of all extra fields.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.Extras.RdioPlaylistExtras">
+            <summary>
+            Defines the constants for all the extra fields in <seealso cref="T:RdioNet.Models.RdioPlaylist"/>.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Extras.RdioPlaylistExtras.All">
+            <summary>
+            A collection of all extra fields.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.Extras.RdioTrackExtras">
+            <summary>
+            Defines the constants for all the extra fields in <seealso cref="T:RdioNet.Models.RdioTrack"/>.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Extras.RdioTrackExtras.All">
+            <summary>
+            A collection of all extra fields.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.Extras.RdioUserExtras">
+            <summary>
+            Defines the constants for all the extra fields in <seealso cref="T:RdioNet.Models.RdioUser"/>.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Extras.RdioUserExtras.All">
+            <summary>
+            A collection of all extra fields.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioCollectionArtist">
+            <summary>
+            Represents an artist in a user's collection. It will be basically the same as the 
+            equivalent Artist except it only contains the albums that are in the user's collection.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioArtist">
+            <summary>
+            Represents an artist on Rdio, either an individual performer or a group.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtist.Name">
+            <summary>
+            The name of the artist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtist.Url">
+            <summary>
+            The relative URL of the artist on the Rdio web site.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtist.Length">
+            <summary>
+            The number of tracks that the artist has on Rdio.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtist.Icon">
+            <summary>
+            An image for the artist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtist.BaseIcon">
+            <summary>
+            The partial URL of an image for the artist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtist.HasRadio">
+            <summary>
+            Identifies if the artist has a radio available on Rdio. 
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtist.ShortUrl">
+            <summary>
+            A short URL for the artist page.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtist.RadioKey">
+            <summary>
+            The key of the station for artist recommendations.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtist.TopSongsKey">
+            <summary>
+            The key of the station for the artist's top songs.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtist.AlbumCount">
+            <summary>
+            Extra. The number of albums that the artist has on Rdio.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtist.Hits">
+            <summary>
+            Sometimes. Indicates the popularity weight.
+            </summary>
+            <remarks>
+            This field is returned when calling GetHeavyRotationsAsync.
+            </remarks>
+        </member>
+        <member name="P:RdioNet.Models.RdioArtist.Extras">
+            <summary>
+            List of extra properties.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioCollectionArtist.UserKey">
+            <summary>
+            The key of the user whose collection this artist is in.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioCollectionArtist.Username">
+            <summary>
+            The username of the user whose collection this artist is in.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioCollectionArtist.ArtistKey">
+            <summary>
+            The key of the artist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioCollectionArtist.ArtistUrl">
+            <summary>
+            The relative URL of the artist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioCollectionArtist.CollectionUrl">
+            <summary>
+            The relative URL of the user's collection page.	This item doesn't seem to be provided.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioCollectionArtist.Count">
+            <summary>
+            Extra. The number of tracks from this artist in the user collection.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioCollectionArtist.Extras">
+            <summary>
+            List of extra properties.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioCollectionAlbum">
+            <summary>
+            Represents an album in a user's collection. It is basically the same as the equivalent Album type
+            except that it will only contain the subset of tracks from the album that the user has in their collection.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioAlbum">
+            <summary>
+            Represents a recording on Rdio, usually an album but often a single, EP or compilation.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.Name">
+            <summary>
+            The name of the album.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.Icon">
+            <summary>
+            The URL to the cover art for the album. Usually 200x200 pixels.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.BaseIcon">
+            <summary>
+            The relative URL to the cover art of the album. See <see cref="P:RdioNet.Models.RdioAlbum.Icon"/> or <see cref="P:RdioNet.Models.RdioAlbum.BigIcon"/>
+            for a working URL.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.Url">
+            <summary>
+            The relative URL of the album on Rdio site.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.Artist">
+            <summary>
+            The name of the artist that released the album.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.ArtistUrl">
+            <summary>
+            The relative URL of the artist that released the album.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.IsExplicit">
+            <summary>
+            Identifies if the album is explicit.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.IsClean">
+            <summary>
+            Identifies if the album is clean.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.Length">
+            <summary>
+            Number of tracks in the album.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.ArtistKey">
+            <summary>
+            The key of the artist that released the album. Can be used to query the artist on <seealso cref="T:RdioNet.RdioClient"/>. 
+            See also <seealso cref="T:RdioNet.Models.RdioArtist"/>.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.TrackKeys">
+            <summary>
+            The keys of the tracks in the album. Can be used to query the track on <seealso cref="T:RdioNet.RdioClient"/>.
+            See also <seealso cref="T:RdioNet.Models.RdioTrack"/>.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.Price">
+            <summary>
+            The price of the album in US cents.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.CanStream">
+            <summary>
+            Identifies if the album can be streamed.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.CanSample">
+            <summary>
+            Identifies if the album can be previewed.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.CanTether">
+            <summary>
+            Identifies if the album can be synchronized to mobile devices.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.ShortUrl">
+            <summary>
+            A shortened Url for the album on Rdio website.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.EmbedUrl">
+            <summary>
+            A shortened Url of a SWF to embed the album.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.DisplayDate">
+            <summary>
+            The release date of the album in a human readable format. See <see cref="P:RdioNet.Models.RdioAlbum.ReleaseDate"/>.
+            </summary>
+            <remarks>
+            The date is localized to US. Please use <see cref="P:RdioNet.Models.RdioAlbum.ReleaseDate"/> instead for more control over the format.
+            </remarks>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.ReleaseDate">
+            <summary>
+            The release date of the album. 
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.Duration">
+            <summary>
+            The duration of the album.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.IFrameUrl">
+            <summary>
+            Extra. The Url of an HTML IFrame to embed the album.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.IsCompilation">
+            <summary>
+            Extra. Identifies if this is a compilation album.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.Label">
+            <summary>
+            Extra. The label that published this album.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.BigIcon">
+            <summary>
+            Extra. The Url for the cover art of the album (large).
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.ReleaseDateIso">
+            <summary>
+            Extra. The release date of the album in ISO format. Use <see cref="P:RdioNet.Models.RdioAlbum.ReleaseDate"/> instead.
+            </summary>
+            <remarks>
+            This field is included only for API compliance purposes. Should not be used.
+            </remarks>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.Hits">
+            <summary>
+            Sometimes. Indicates the popularity weight.
+            </summary>
+            <remarks>
+            This field is returned when calling GetHeavyRotationsAsync.
+            </remarks>
+        </member>
+        <member name="P:RdioNet.Models.RdioAlbum.Extras">
+            <summary>
+            List of extra properties.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioCollectionAlbum.UserKey">
+            <summary>
+            The key of the user whose collection this album is in.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioCollectionAlbum.Username">
+            <summary>
+            The username of the user whose collection this album is in.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioCollectionAlbum.AlbumKey">
+            <summary>
+            The key of the original album.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioCollectionAlbum.AlbumUrl">
+            <summary>
+            The relative URL of the original album.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioCollectionAlbum.CollectionUrl">
+            <summary>
+            The relative URL for the user's collection page. This item doesn't seem to be provided.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioCollectionAlbum.ItemTrackKeys">
+            <summary>
+            A list of all the track keys contained in the original album.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioCollectionAlbum.UserGender">
+            <summary>
+            Extra. The user's gender.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioCollectionAlbum.Extras">
+            <summary>
+            List of extra properties.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioLabelStation">
+            <summary>
+            Represents a label's station.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioLabelStation.LabelName">
+            <summary>
+            The name of the label.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioLabelStation.HasRadio">
+            <summary>
+            Identifies if a station is available for the label.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioLabelStation.LabelUrl">
+            <summary>
+            The relative URL of the label on Rdio web site.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioLabelStation.ShortUrl">
+            <summary>
+            The URL of the label on Rdio web site.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioLabelStation.Url">
+            <summary>
+            The relative URL of the label on Rdio web site.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioLabelStation.RadioKey">
+            <summary>
+            The key of the station for label recommendations.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioUser">
+            <summary>
+            Represents an Rdio user.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.FirstName">
+            <summary>
+            The first name of the user.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.LastName">
+            <summary>
+            The last name of the user.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.Icon">
+            <summary>
+            The URL of an image of the user.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.BaseIcon">
+            <summary>
+            The relative URL of an image of the user.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.LibraryVersion">
+            <summary>
+            The library version of the user, used to determine if a user's collection has changed.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.Url">
+            <summary>
+            The relative URL of the user on Rdio web site.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.Gender">
+            <summary>
+            The gender of the user.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.FollowingUrl">
+            <summary>
+            Extra. The relative URL of the user's following page.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.IsTrial">
+            <summary>
+            Extra. Identifies if the user is an trial period.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.ArtistCount">
+            <summary>
+            Extra. The number of artists in the user's collection.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.LastSongPlayed">
+            <summary>
+            Extra. The last song the user has played.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.HeavyRotationKey">
+            <summary>
+            Extra. The key of the station for user's heavy rotation.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.NetworkHeavyRotationKey">
+            <summary>
+            Extra. The key of the station for user's network's heavy rotation.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.AlbumCount">
+            <summary>
+            Extra. The number of albums in the user's collection.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.TrackCount">
+            <summary>
+            Extra. The number of tracks in the user's collection.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.LastSongPlayTime">
+            <summary>
+            Extra. When the last song was played.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.Username">
+            <summary>
+            Extra. The user's vanity name.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.ReviewCount">
+            <summary>
+            Extra. The number of reviews the user has created.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.CollectionUrl">
+            <summary>
+            Extra. The relative URL of the user's collection page.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.PlaylistsUrl">
+            <summary>
+            Extra. The relative URL of the user's playlists page.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.CollectionKey">
+            <summary>
+            Extra. The key of the station for the user's collection.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.FollowersUrl">
+            <summary>
+            Extra. The relative URL of the user's followers page.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.DisplayName">
+            <summary>
+            Extra. The user's display name.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.IsUnlimited">
+            <summary>
+            Extra. Identifies if the user has an unlimited subscription plan.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.IsSubscriber">
+            <summary>
+            Extra. Identifies if the user has a subscription plan.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.TwitterUrl">
+            <summary>
+            Extra. Identifies an user's Twitter account.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioUser.Extras">
+            <summary>
+            List of extra properties.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioPlaylist">
+            <summary>
+            Represents a playlist on Rdio.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.Name">
+            <summary>
+            The name of the playlist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.Length">
+            <summary>
+            The number of tracks in the playlist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.Url">
+            <summary>
+            The relative URL of the playlist on the Rdio web site.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.Icon">
+            <summary>
+            The URL of an icon for the playlist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.BaseIcon">
+            <summary>
+            The relative URI of an icon for the playlist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.Owner">
+            <summary>
+            The name of the user who created the playlist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.OwnerUrl">
+            <summary>
+            The relative URL on the Rdio site of the user who created the playlist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.OwnerKey">
+            <summary>
+            The key of the user who created the playlist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.OwnerIcon">
+            <summary>
+            The relative URL of the icon of the user who created the playlist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.LastUpdated">
+            <summary>
+            When the playlist was last modified.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.ShortUrl">
+            <summary>
+            A short URL for the playlist page.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.EmbedUrl">
+            <summary>
+            The URL of a SWF to embed the playlist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.IFrameUrl">
+            <summary>
+            Extra. The URL of an IFRAME to embed the album.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.IsViewable">
+            <summary>
+            Extra. Identifies wether the playlist is currently publicly viewable.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.BigIcon">
+            <summary>
+            Extra. The URL of an icon for the playlist (large).
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.Description">
+            <summary>
+            Extra. The description of the playlist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.Tracks">
+            <summary>
+            Extra. The tracks in the playlist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.IsPublished">
+            <summary>
+            Extra. Identifies wether the playlist has been published by the user.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.TrackKeys">
+            <summary>
+            Extra. The keys of the tracks in the playlist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.ReasonNotViewable">
+            <summary>
+            Extra. Identifies the reason the playlist is not publicly viewable, if there's one.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioPlaylist.Extras">
+            <summary>
+            List of extra properties.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioPlaylistVisibilityReason">
+            <summary>
+            An enumeration of the reason a playlist is not viewable.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioPlaylistVisibilityReason.Viewable">
+            <summary>
+            The playlist is actually viewable.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioPlaylistVisibilityReason.UserPreference">
+            <summary>
+            The user set the playlist as not viewable.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioPlaylistVisibilityReason.OrderedAlbum">
+            <summary>
+            The playlist resembles an existing album.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioPlaylistVisibilityReason.TooFewSongs">
+            <summary>
+            There are too few songs in the playlist to be worth viewing.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioTrack">
+            <summary>
+            Represents a song on Rdio.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.Name">
+            <summary>
+            THe name of the track.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.Artist">
+            <summary>
+            The name of the artist who performed the track.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.Album">
+            <summary>
+            The name of the album that the track appears on.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.AlbumKey">
+            <summary>
+            The key of the album that the track appears on.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.AlbumUrl">
+            <summary>
+            The relative URL of the album that the track appears on.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.ArtistKey">
+            <summary>
+            The key of the track's artist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.ArtistUrl">
+            <summary>
+            The relative URL of the track's artist on the Rdio web site.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.Length">
+            <summary>
+            The number of tracks in the track, i.e. 1.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.Duration">
+            <summary>
+            The duration of the track.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.IsExplicit">
+            <summary>
+            Identifies if the track is explicit.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.IsClean">
+            <summary>
+            Identifies if the track is clean.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.Url">
+            <summary>
+            The relative URL of the track on the Rdio web site.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.BaseIcon">
+            <summary>
+            The relative URL of the album-art for the track.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.AlbumArtist">
+            <summary>
+            The name of the artist whose album the track appears on.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.AlbumArtistKey">
+            <summary>
+            The key of the artist whose album the track appears on.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.CanDownload">
+            <summary>
+            Identifies if the track can be downloaded.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.CanDownloadAlbumOnly">
+            <summary>
+            Identifies if the track can only be downloaded as part of an album download.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.CanStream">
+            <summary>
+            Identifies if the track can be streamed.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.CanTether">
+            <summary>
+            Identifies if the track can be synchronized to mobile devices.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.CanSample">
+            <summary>
+            Identifies if the track can be previewed.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.Price">
+            <summary>
+            The price of the track in US cents.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.ShortUrl">
+            <summary>
+            A short URL for the track.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.EmbedUrl">
+            <summary>
+            The URL of a SWF to embed the track.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.Icon">
+            <summary>
+            The URL of the album-art for the track.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.TrackNum">
+            <summary>
+            The order within its album that this track appears.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.IsInCollection">
+            <summary>
+            Extra. Identifies if the track is in the user's collection.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.IsOnCompilation">
+            <summary>
+            Extra. Identfieis if the track is on a compilation album.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.IFrameUrl">
+            <summary>
+            Extra. The URL of an IFRAME to embed the album.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.PlayCount">
+            <summary>
+            Extra. The number of times this track has been played on Rdio.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.BigIcon">
+            <summary>
+            Extra. The URL to the album-art for track (large).
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioTrack.Extras">
+            <summary>
+            List of extra properties.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioLabel">
+            <summary>
+            Represents a record label.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioLabel.Name">
+            <summary>
+            The name of the artist.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioLabel.Url">
+            <summary>
+            The relative URL of the label on the Rdio web site.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioLabel.ShortUrl">
+            <summary>
+            A short URL for the label page.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioLabel.HasRadio">
+            <summary>
+            Identifies if the label has a radio station available on Rdio. 
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.RdioLabel.RadioKey">
+            <summary>
+            The key of the station for label recommendations.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.Results.RdioResult`1">
+            <summary>
+            A typical result returned by the Rdio Web Service.
+            </summary>
+            <typeparam name="TResult">The type of the object returned in the Result property.</typeparam>
+        </member>
+        <member name="P:RdioNet.Models.Results.RdioResult`1.Status">
+            <summary>
+            The status of the call.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Results.RdioResult`1.Message">
+            <summary>
+            The message returned when there's a problem with the call.
+            </summary>
+        </member>
+        <member name="P:RdioNet.Models.Results.RdioResult`1.Result">
+            <summary>
+            The result of the call.
+            </summary>
+        </member>
+        <member name="T:RdioNet.OAuth.OAuthCredentials">
+            <summary>
+            The OAuth credentials required to access the Rdio API.
+            </summary>
+        </member>
+        <member name="P:RdioNet.OAuth.OAuthCredentials.ConsumerKey">
+            <summary>
+            The OAuth consumer's key.
+            </summary>
+        </member>
+        <member name="P:RdioNet.OAuth.OAuthCredentials.ConsumerSecret">
+            <summary>
+            The OAuth consumer's secret.
+            </summary>
+        </member>
+        <member name="P:RdioNet.OAuth.OAuthCredentials.Token">
+            <summary>
+            The <seealso cref="T:RdioNet.OAuth.OAuthToken"/> object containing either a request token or an access token.
+            </summary>
+        </member>
+        <member name="T:RdioNet.OAuth.OAuthRequestState">
+            <summary>
+            Holds the current OAuth authorization request state.
+            </summary>
+        </member>
+        <member name="P:RdioNet.OAuth.OAuthRequestState.AuthorizationUrl">
+            <summary>
+            The authorization url.
+            </summary>
+        </member>
+        <member name="P:RdioNet.OAuth.OAuthRequestState.RequestToken">
+            <summary>
+            The associated request token.
+            </summary>
+        </member>
+        <member name="P:RdioNet.OAuth.OAuthRequestState.CallbackConfirmed">
+            <summary>
+            Identifies if the supplied callback was received. Always true.
+            </summary>
+        </member>
+        <member name="T:RdioNet.OAuth.OAuthToken">
+            <summary>
+            Represents an OAuth token.
+            </summary>
+        </member>
+        <member name="M:RdioNet.OAuth.OAuthToken.Copy">
+            <summary>
+            Performs a copy of the object.
+            </summary>
+            <returns>Returns a new copy of the object.</returns>
+        </member>
+        <member name="P:RdioNet.OAuth.OAuthToken.Token">
+            <summary>
+            The token.
+            </summary>
+        </member>
+        <member name="P:RdioNet.OAuth.OAuthToken.Secret">
+            <summary>
+            The token's secret.
+            </summary>
+        </member>
+        <member name="P:RdioNet.OAuth.OAuthToken.Type">
+            <summary>
+            The type of the token.
+            </summary>
+        </member>
+        <member name="T:RdioNet.OAuth.OAuthTokenType">
+            <summary>
+            A list of OAuth token types.
+            </summary>
+        </member>
+        <member name="F:RdioNet.OAuth.OAuthTokenType.Unknown">
+            <summary>
+            Poorly created <seealso cref="T:RdioNet.OAuth.OAuthToken"/> objects have this value.
+            </summary>
+        </member>
+        <member name="F:RdioNet.OAuth.OAuthTokenType.Request">
+            <summary>
+            An OAuth request token.
+            </summary>
+        </member>
+        <member name="F:RdioNet.OAuth.OAuthTokenType.Access">
+            <summary>
+            An OAuth access token.
+            </summary>
+        </member>
+        <member name="T:RdioNet.Models.RdioPlaylistKind">
+            <summary>
+            Defines an enumeration of possible playlist kinds.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioPlaylistKind.Owned">
+            <summary>
+            The user owns the playlist.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioPlaylistKind.Collab">
+            <summary>
+            The user is a collaborator of the playlist.
+            </summary>
+        </member>
+        <member name="F:RdioNet.Models.RdioPlaylistKind.Subscribed">
+            <summary>
+            The user has subscribed to the playlist
+            </summary>
+        </member>
+        <member name="T:RdioNet.Methods.CoreMethods">
+            <summary>
+            Core methods of the Rdio API.
+            </summary>
+        </member>
+        <member name="M:RdioNet.Methods.CoreMethods.GetAsync``1(System.String,System.String[])">
+            <summary>
+            Fetches one object from Rdio.
+            </summary>
+            <param name="key">The key of the object being fetched.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns an object whose key are the key supplied to the call. 
+            This object can be of any type. If the returned object is not of type <typeparam name="T"/>
+            an exception will be thrown.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CoreMethods.GetAsync``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.String[])">
+            <summary>
+            Fetches one object from Rdio.
+            </summary>
+            <param name="key">The key of the object being fetched.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <param name="options">A dictionary of undocumented options.</param>
+            <returns>Returns an object whose key are the key supplied to the call. 
+            This object can be of any type. If the returned object is not of type <typeparam name="T"/>
+            an exception will be thrown.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CoreMethods.GetAsync``1(System.Collections.Generic.IEnumerable{System.String},System.String[])">
+            <summary>
+            Fetches multiple objects from Rdio.
+            </summary>
+            <param name="key">The keys of the objects being fetched.</param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns a dictionary of objects whose keys are the keys supplied to the call. 
+            This object can be of any type. If the returned object is not of type <typeparam name="T"/>
+            an exception will be thrown.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CoreMethods.GetAsync``1(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IDictionary{System.String,System.String},System.String[])">
+            <summary>
+            Fetches multiple objects from Rdio.
+            </summary>
+            <param name="key">The keys of the objects being fetched.</param>
+            <param name="extras">The extra fields to be included in the object.</param>	
+            <param name="options">A dictionary of undocumented options.</param>
+            <returns>Returns a dictionary of objects whose keys are the keys supplied to the call. 
+            This object can be of any type. If the returned object is not of type <typeparam name="T"/>
+            an exception will be thrown.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CoreMethods.GetObjectFromShortCodeAsync``1(System.String,System.String[])">
+            <summary>
+            Gets the object that the supplied Rdio short-code is a representation of, or an error if the short-code is invalid.
+            </summary>
+            <param name="shortCode">The short-code, everything after the http://rd.io/x/. </param>
+            <param name="extras">The extra fields to be included in the object.</param>
+            <returns>Returns the object that the short-code links to, or an empty object if the short-code is invalid or doesn't link anywhere.</returns>
+        </member>
+        <member name="M:RdioNet.Methods.CoreMethods.GetObjectFromUrlAsync``1(System.String,System.String[])">
+            <summary>
+            Return the object that the supplied Rdio url is a representation of, or 404 error response if the url doesn't represent an object.
+            </summary>
+            <param name="url">The path portion of the url</param>
+            <param name="extras"></param>
+            <returns>Returns the object represented at the url, or a 404 error response if the url doesn't point to page representing an object.</returns>
+        </member>
+        <member name="T:RdioNet.RdioClient">
+            <summary>
+            A Rdio Web Services client.
+            </summary>
+        </member>
+        <member name="M:RdioNet.RdioClient.#ctor(System.String,System.String)">
+            <summary>
+            Creates a new instance of RdioClient with just Consumer information. To access
+            protected methods, you must request user authorization first.
+            </summary>
+            <param name="consumerKey">The OAuth consumer's key.</param>
+            <param name="consumerSecret">The OAuth consumer's secret.</param>
+        </member>
+        <member name="M:RdioNet.RdioClient.#ctor(System.String,System.String,RdioNet.RdioServiceDescription)">
+            <summary>
+            Creates a new instance of RdioClient with just Consumer information. To access
+            protected methods, you must request user authorization first.
+            </summary>
+            <param name="consumerKey">The OAuth consumer's key.</param>
+            <param name="consumerSecret">The OAuth consumer's secret.</param>
+            <param name="serviceDescription">A custom <seealso cref="T:RdioNet.RdioServiceDescription"/> object defining
+            API endpoints.</param>
+        </member>
+        <member name="M:RdioNet.RdioClient.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a new instance of RdioClient with Consumer and Access information.
+            </summary>
+            <param name="consumerKey">The OAuth consumer's key.</param>
+            <param name="consumerSecret">The OAuth consumer's secret.</param>
+            <param name="accessSecret">The OAuth access secret.</param>
+            <param name="accessToken">The OAuth access token.</param>
+        </member>
+        <member name="M:RdioNet.RdioClient.#ctor(System.String,System.String,System.String,System.String,RdioNet.RdioServiceDescription)">
+            <summary>
+            Creates a new instance of RdioClient with Consumer and Access information.
+            </summary>
+            <param name="consumerKey">The OAuth consumer's key.</param>
+            <param name="consumerSecret">The OAuth consumer's secret.</param>
+            <param name="accessSecret">The OAuth access secret.</param>
+            <param name="accessToken">The OAuth access token.</param>
+            <param name="serviceDescription">A custom <seealso cref="T:RdioNet.RdioServiceDescription"/> object defining
+            API endpoints.</param>
+        </member>
+        <member name="M:RdioNet.RdioClient.RequestUserAuthorizationAsync(System.Uri)">
+            <summary>
+            Initiates an OAuth authorization request.
+            </summary>
+            <param name="callbackUrl">The callbackUrl if it's a web authentication (must have HttpContext.Current != null). 
+            Otherwise should be <value>null</value>.</param>
+            <returns>Returns the state of the authorization request.</returns>
+        </member>
+        <member name="M:RdioNet.RdioClient.CompleteUserAuthorizationAsync">
+            <summary>
+            Completes the OAuth authorization request using HttpContext.Current.
+            </summary>
+            <returns>The <seealso cref="T:RdioNet.OAuth.OAuthToken"/> containing the Access Token.</returns>
+        </member>
+        <member name="M:RdioNet.RdioClient.CompleteUserAuthorizationAsync(RdioNet.OAuth.OAuthRequestState)">
+            <summary>
+            Completes the OAuth authorization request using HttpContext.Current.
+            </summary>
+            <param name="state">The original <seealso cref="T:RdioNet.OAuth.OAuthRequestState"/> object containing the request token.</param> 
+            <returns>The <seealso cref="T:RdioNet.OAuth.OAuthToken"/> containing the Access Token.</returns>
+        </member>
+        <member name="M:RdioNet.RdioClient.CompleteUserAuthorizationAsync(System.String)">
+            <summary>
+            Completes the OAuth authorization request using the verifier supplied by the user.
+            </summary>
+            <param name="verifier">The verification code informed by the user.</param>
+            <returns>The <seealso cref="T:RdioNet.OAuth.OAuthToken"/> containing the Access Token.</returns>
+        </member>
+        <member name="M:RdioNet.RdioClient.CompleteUserAuthorizationAsync(RdioNet.OAuth.OAuthRequestState,System.String)">
+            <summary>
+            Completes the OAuth authorization request using the verifier supplied by the user.
+            </summary>
+            <param name="state">The original <seealso cref="T:RdioNet.OAuth.OAuthRequestState"/> object containing the request token.</param>
+            <param name="verifier">The verification code informed by the user.</param>
+            <returns>The <seealso cref="T:RdioNet.OAuth.OAuthToken"/> containing the Access Token.</returns>
+        </member>
+        <member name="M:RdioNet.RdioClient.OnInitializeMethods">
+            <summary>
+            Overriden in a derived class, this method allows the user to initiliaze
+            custom method properties.
+            </summary>
+        </member>
+        <member name="P:RdioNet.RdioClient.ServiceDescription">
+            <summary>
+            The Rdio Web Services description.
+            </summary>
+        </member>
+        <member name="P:RdioNet.RdioClient.Credentials">
+            <summary>
+            The users credentials to access the service.
+            </summary>
+        </member>
+        <member name="P:RdioNet.RdioClient.Core">
+            <summary>
+            The Core methods of the Rdio API.
+            </summary>
+        </member>
+        <member name="P:RdioNet.RdioClient.Catalog">
+            <summary>
+            Catalog methods of the Rdio API.
+            </summary>
+        </member>
+        <member name="P:RdioNet.RdioClient.Collection">
+            <summary>
+            Collection methods of the Rdio API.
+            </summary>
+        </member>
+        <member name="P:RdioNet.RdioClient.Playlists">
+            <summary>
+            Playlists methods of the Rdio API.
+            </summary>
+        </member>
+        <member name="P:RdioNet.RdioClient.SocialNetwork">
+            <summary>
+            Social Network methods of the Rdio API.
+            </summary>
+        </member>
+        <member name="P:RdioNet.RdioClient.Activity">
+            <summary>
+            Activity and Statistics methods of the Rdio API.
+            </summary>
+        </member>
+        <member name="P:RdioNet.RdioClient.Playback">
+            <summary>
+            Playback methods of the Rdio API.
+            </summary>
+        </member>
+        <member name="T:RdioNet.RdioServiceDescription">
+            <summary>
+            Defines the OAuth and WebService endpoints.
+            </summary>
+        </member>
+        <member name="M:RdioNet.RdioServiceDescription.Copy">
+            <summary>
+            Creates a new copy of the service description.
+            </summary>
+            <returns>Returns a new copy of the service description.</returns>
+        </member>
+        <member name="P:RdioNet.RdioServiceDescription.Default">
+            <summary>
+            The default service description.
+            </summary>
+        </member>
+        <member name="P:RdioNet.RdioServiceDescription.AccessTokenEndpoint">
+            <summary>
+            The OAuth AccessToken endpoing.
+            </summary>
+        </member>
+        <member name="P:RdioNet.RdioServiceDescription.RequestTokenEndpoint">
+            <summary>
+            The OAuth RequestToken endpoint.
+            </summary>
+        </member>
+        <member name="P:RdioNet.RdioServiceDescription.WebServiceEndpoint">
+            <summary>
+            The Rdio API web service endpoint.
+            </summary>
+        </member>
+        <member name="P:RdioNet.RdioServiceDescription.MediaEndpoint">
+            <summary>
+            The default CDN endpoint for images.
+            </summary>
+        </member>
+    </members>
+</doc>
