@@ -1,3 +1,4 @@
+using System.Windows.Controls;
 using NUnit.Framework;
 
 namespace RdioClientTests
@@ -14,8 +15,8 @@ namespace RdioClientTests
 		[Test]
 		public void Test01()
 		{
-			// Check out https://www.npmjs.com/package/rdio-js-api and https://github.com/rdio/jsapi-examples
-			// if that doesnt work either...cut out c# and learn use something else :-)
+			
+			
 		}
 	}
 }
